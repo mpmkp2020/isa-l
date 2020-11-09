@@ -1,4 +1,5 @@
 language: c
+arch: arm64
 sudo: required
 matrix:
   include:
