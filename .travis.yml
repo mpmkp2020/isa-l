@@ -1,5 +1,4 @@
 language: c
-arch: arm64
 sudo: required
 matrix:
   include:
@@ -23,6 +22,7 @@ matrix:
 
     ### linux clang
     - dist: xenial
+      arch: arm64
       addons:
         apt:
           packages:
