@@ -9,6 +9,7 @@ matrix:
 
     ### linux gcc and format check
     - dist: xenial
+      arch: amd64
       addons:
         apt:
           packages:
