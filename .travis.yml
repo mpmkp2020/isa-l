@@ -18,12 +18,12 @@ matrix:
         - sudo apt-get install texinfo
         - |
           if [ `uname -m` = 'aarch64' ]; then
-            wget http://ports.ubuntu.com/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
+            sudo apt-get install indent=2.2.12-1
           else
             wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
+            tar -xJf /tmp/indent.tar.xz -C /tmp/
+            pushd /tmp/indent-2.2.12 && ./configure --prefix=/usr && make && sudo make install && popd
           fi
-        - tar -xJf /tmp/indent.tar.xz -C /tmp/
-        - pushd /tmp/indent-2.2.12 && ./configure --prefix=/usr && make && sudo make install && popd
       env: C_COMPILER=gcc
 
     ### linux clang
@@ -72,8 +72,8 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - binutils-mingw-w64-arm64
-            - gcc-mingw-w64-arm64
+            - binutils-mingw-w64-x86_64
+            - gcc-mingw-w64-x86_64
             - wine
             - nasm
       env: TEST_TYPE=ext
