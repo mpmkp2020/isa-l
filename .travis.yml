@@ -18,8 +18,7 @@ matrix:
         - sudo apt-get install texinfo
         - |
           if [ `uname -m` = 'aarch64' ]; then
-            sudo apt-get update && sudo apt-get install indent=2.2.12-1 || true
-            sudo apt-get install indent
+            sudo apt-get update && sudo apt-get install indent
           else
             wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
             tar -xJf /tmp/indent.tar.xz -C /tmp/
@@ -80,7 +79,7 @@ matrix:
       env: TEST_TYPE=ext
       before_install:
         - sudo sh -c "echo 'deb http://ports.ubuntu.com/ubuntu-ports/ focal universe' >> /etc/apt/sources.list"
-        - sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 wine nasm
+        - sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 wine nasm indent
         - if [ -n "${C_COMPILER}" ]; then export CC="${C_COMPILER}"; fi
         - if [ -n "${AS_ASSEMBL}" ]; then export AS="${AS_ASSEMBL}"; fi
 
