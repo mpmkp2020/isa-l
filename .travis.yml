@@ -18,7 +18,8 @@ matrix:
         - sudo apt-get install texinfo
         - |
           if [ `uname -m` = 'aarch64' ]; then
-            sudo apt-get install indent=2.2.12-1
+            sudo apt-get update && sudo apt-get install indent=2.2.12-1 || true
+            sudo apt-get install indent
           else
             wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
             tar -xJf /tmp/indent.tar.xz -C /tmp/
