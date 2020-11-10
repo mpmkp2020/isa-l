@@ -1,6 +1,5 @@
 language: c
 sudo: required
-arch: arm64
 matrix:
   include:
     ### OS X
@@ -16,14 +15,21 @@ matrix:
       install:
         # Install newer indent to check formatting
         - sudo apt-get install texinfo
-        - |
-          if [ `uname -m` = 'aarch64' ]; then
-            sudo apt-get update && sudo apt-get install indent
-          else
-            wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
-            tar -xJf /tmp/indent.tar.xz -C /tmp/
-            pushd /tmp/indent-2.2.12 && ./configure --prefix=/usr && make && sudo make install && popd
-          fi
+        - wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
+        - tar -xJf /tmp/indent.tar.xz -C /tmp/
+        - pushd /tmp/indent-2.2.12 && ./configure --prefix=/usr && make && sudo make install && popd
+      env: C_COMPILER=gcc
+
+    - dist: xenial
+      arch: arm64
+      addons:
+        apt:
+          packages:
+            - nasm
+      install:
+        # Install newer indent to check formatting
+        - sudo apt-get install texinfo
+        - sudo apt-get update && sudo apt-get install indent
       env: C_COMPILER=gcc
 
     ### linux clang
@@ -34,8 +40,27 @@ matrix:
             - nasm
       env: C_COMPILER=clang
 
+    - dist: xenial
+      arch: arm64
+      addons:
+        apt:
+          packages:
+            - nasm
+      env: C_COMPILER=clang
+
     ### linux newer clang
     - dist: trusty
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - clang-4.0
+      env: C_COMPILER=clang-4.0
+
+    - dist: trusty
+      arch: arm64
       addons:
         apt:
           sources:
@@ -55,8 +80,28 @@ matrix:
             - g++-4.7
       env: C_COMPILER=gcc-4.7
 
+    - dist: xenial
+      arch: arm64
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.7
+      env: C_COMPILER=gcc-4.7
+
     ### linux newer gcc
     - dist: trusty
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+      env: C_COMPILER=gcc-6
+
+    - dist: trusty
+      arch: arm64
       addons:
         apt:
           sources:
@@ -72,16 +117,29 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            #- binutils-mingw-w64-x86_64
-            #- gcc-mingw-w64-x86_64
-            #- wine
-            #- nasm
+            - binutils-mingw-w64-x86_64
+            - gcc-mingw-w64-x86_64
+            - wine
+            - nasm
       env: TEST_TYPE=ext
-      before_install:
-        - sudo sh -c "echo 'deb http://ports.ubuntu.com/ubuntu-ports/ focal universe' >> /etc/apt/sources.list"
-        - sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 wine nasm indent
-        - if [ -n "${C_COMPILER}" ]; then export CC="${C_COMPILER}"; fi
-        - if [ -n "${AS_ASSEMBL}" ]; then export AS="${AS_ASSEMBL}"; fi
+
+    - dist: focal
+      arch: arm64
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - binutils-mingw-w64-x86_64
+            - gcc-mingw-w64-x86_64
+            - wine
+            - nasm
+      env: TEST_TYPE=ext
+      #before_install:
+      #  - sudo sh -c "echo 'deb http://ports.ubuntu.com/ubuntu-ports/ focal universe' >> /etc/apt/sources.list"
+      #  - sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 wine nasm indent
+      #  - if [ -n "${C_COMPILER}" ]; then export CC="${C_COMPILER}"; fi
+      #  - if [ -n "${AS_ASSEMBL}" ]; then export AS="${AS_ASSEMBL}"; fi
 
 
 before_install:
