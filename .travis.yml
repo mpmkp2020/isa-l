@@ -125,21 +125,12 @@ matrix:
 
     - dist: focal
       arch: arm64
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - binutils-mingw-w64-x86_64
-            - gcc-mingw-w64-x86_64
-            - wine
-            - nasm
       env: TEST_TYPE=ext
-      #before_install:
-      #  - sudo sh -c "echo 'deb http://ports.ubuntu.com/ubuntu-ports/ focal universe' >> /etc/apt/sources.list"
-      #  - sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 wine nasm indent
-      #  - if [ -n "${C_COMPILER}" ]; then export CC="${C_COMPILER}"; fi
-      #  - if [ -n "${AS_ASSEMBL}" ]; then export AS="${AS_ASSEMBL}"; fi
+      before_install:
+        - sudo sh -c "echo 'deb http://ports.ubuntu.com/ubuntu-ports/ focal universe' >> /etc/apt/sources.list"
+        - sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 wine nasm indent
+        - if [ -n "${C_COMPILER}" ]; then export CC="${C_COMPILER}"; fi
+        - if [ -n "${AS_ASSEMBL}" ]; then export AS="${AS_ASSEMBL}"; fi
 
 
 before_install:
