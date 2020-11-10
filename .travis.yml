@@ -8,6 +8,7 @@ matrix:
 
     ### linux gcc and format check
     - dist: xenial
+      arch: arm64
       addons:
         apt:
           packages:
