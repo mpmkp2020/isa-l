@@ -79,7 +79,7 @@ matrix:
             #- nasm
       env: TEST_TYPE=ext
       before_install:
-        - sudo sh -c "echo 'deb http://ports.ubuntu.com/ubuntu-ports/ xenial main universe' >> /etc/apt/sources.list"
+        - sudo sh -c "echo 'deb http://ports.ubuntu.com/ubuntu-ports/ focal universe' >> /etc/apt/sources.list"
         - sudo apt-get update && sudo apt-get install gcc-mingw-w64-x86 binutils-mingw-w64-x86-64 wine nasm
         - if [ -n "${C_COMPILER}" ]; then export CC="${C_COMPILER}"; fi
         - if [ -n "${AS_ASSEMBL}" ]; then export AS="${AS_ASSEMBL}"; fi
