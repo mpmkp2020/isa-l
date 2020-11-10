@@ -111,14 +111,14 @@ matrix:
       env: C_COMPILER=gcc-6
 
     ### linux extended tests
-    - dist: focal
+    - dist: xenial
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - binutils-mingw-w64-x86_64
-            - gcc-mingw-w64-x86_64
+            - binutils-mingw-w64-x86-64
+            - gcc-mingw-w64-x86-64
             - wine
             - nasm
       env: TEST_TYPE=ext
