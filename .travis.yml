@@ -67,7 +67,7 @@ matrix:
       env: C_COMPILER=gcc-6
 
     ### linux extended tests
-    - dist: xenial
+    - dist: focal
       addons:
         apt:
           sources:
