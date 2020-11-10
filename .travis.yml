@@ -1,6 +1,6 @@
 language: c
 sudo: required
-arch: arm64 
+arch: arm64
 matrix:
   include:
     ### OS X
@@ -9,14 +9,13 @@ matrix:
 
     ### linux gcc and format check
     - dist: xenial
-      arch: amd64
       addons:
         apt:
           packages:
             - nasm
       install:
         # Install newer indent to check formatting
-        - sudo apt-get install texinfo
+        - sudo apt-get install texinfo indent
         - wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
         - tar -xJf /tmp/indent.tar.xz -C /tmp/
         - pushd /tmp/indent-2.2.12 && ./configure --prefix=/usr && make && sudo make install && popd
