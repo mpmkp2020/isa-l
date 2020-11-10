@@ -1,6 +1,6 @@
 language: c
 sudo: required
-arch: amd64
+arch: arm64
 matrix:
   include:
     ### OS X
@@ -41,7 +41,7 @@ matrix:
       env: C_COMPILER=clang-4.0
 
     ### linux older gcc
-    - dist: trusty
+    - dist: xenial
       addons:
         apt:
           sources:
@@ -67,8 +67,8 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - binutils-mingw-w64-x86-64
-            - gcc-mingw-w64-x86-64
+            - binutils-mingw-w64-arm64
+            - gcc-mingw-w64-arm64
             - wine
             - nasm
       env: TEST_TYPE=ext
