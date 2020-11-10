@@ -16,7 +16,12 @@ matrix:
       install:
         # Install newer indent to check formatting
         - sudo apt-get install texinfo
-        - wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
+        - |
+          if [ `uname -m` = 'aarch64' ]; then
+            wget http://ports.ubuntu.com/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
+          else
+            wget http://archive.ubuntu.com/ubuntu/pool/main/i/indent/indent_2.2.12.orig.tar.xz -O /tmp/indent.tar.xz
+          fi
         - tar -xJf /tmp/indent.tar.xz -C /tmp/
         - pushd /tmp/indent-2.2.12 && ./configure --prefix=/usr && make && sudo make install && popd
       env: C_COMPILER=gcc
