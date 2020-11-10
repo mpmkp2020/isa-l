@@ -22,7 +22,6 @@ matrix:
 
     ### linux clang
     - dist: xenial
-      arch: arm64
       addons:
         apt:
           packages:
