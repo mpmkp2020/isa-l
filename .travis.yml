@@ -29,7 +29,6 @@ matrix:
       install:
         # Install newer indent to check formatting
         - sudo apt-get install texinfo indent
-        #- sudo apt-get update && sudo apt-get install indent
       env: C_COMPILER=gcc
 
     ### linux clang
